@@ -1,0 +1,21 @@
+services:
+  simulation:
+    image: simulation
+    container_name: sim-container
+    build:
+      context: ./simulation
+      dockerfile: Dockerfile
+      target: sim
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    environment:
+      - DISPLAY=${DISPLAY}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]
