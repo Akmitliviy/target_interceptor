@@ -2,6 +2,7 @@ services:
   simulation:
     image: simulation
     container_name: sim-container
+    network_mode: host
     build:
       context: ./simulation
       dockerfile: Dockerfile
@@ -19,3 +20,17 @@ services:
           - driver: nvidia
             count: 1
             capabilities: [gpu]
+  sitl:
+    image: sitl
+    container_name: sitl-container
+    network_mode: host
+    build:
+      context: ./sitl
+      dockerfile: Dockerfile
+      target: sitl
+      args:
+        - PX4_BRANCH_NAME=main
+    environment:
+      - PX4_GZ_STANDALONE=1
+    depends_on:
+      - simulation

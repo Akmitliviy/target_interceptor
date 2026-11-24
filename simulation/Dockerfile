@@ -15,5 +15,5 @@ ENV GZ_SIM_RESOURCE_PATH=/simulation/gazebo/worlds:${GZ_SIM_RESOURCE_PATH}
 
 WORKDIR /simulation
 
-ENTRYPOINT ["gz", "sim", "-r", "-s", "-v", "4", "--headless-rendering"]
+ENTRYPOINT ["gz", "sim", "-r", "-s", "--headless-rendering"]
 CMD ["camera.sdf"]
