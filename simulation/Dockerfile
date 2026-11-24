@@ -10,9 +10,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg ca-c
      && rm -rf /var/lib/apt/lists/*
 
 FROM base AS sim
-WORKDIR /simulation/source/init
-COPY init.sh .
-RUN chmod +x init.sh
 
-ENTRYPOINT ["/simulation/source/init/init.sh"]
-CMD ["tail", "-f", "/dev/null"]
+ENV GZ_SIM_RESOURCE_PATH=/simulation/gazebo/worlds:${GZ_SIM_RESOURCE_PATH}
+
+WORKDIR /simulation
+
+ENTRYPOINT ["gz", "sim", "-r", "-s", "-v", "4", "--headless-rendering"]
+CMD ["camera.sdf"]

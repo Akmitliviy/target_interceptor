@@ -8,9 +8,9 @@ services:
       target: sim
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - ./simulation/gazebo/worlds:/simulation/gazebo/worlds
     environment:
-      - DISPLAY=${DISPLAY}
-      - NVIDIA_VISIBLE_DEVICES=all
+      - DISPLAY=${DISPLAY:-}
       - NVIDIA_DRIVER_CAPABILITIES=all
     deploy:
       resources:
