@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg ca-c
 
 FROM base AS sim
 
-ENV GZ_SIM_RESOURCE_PATH=/simulation/gazebo/worlds:${GZ_SIM_RESOURCE_PATH}
+ENV GZ_SIM_RESOURCE_PATH=/simulation/gazebo/worlds:/simulation/gazebo/models${GZ_SIM_RESOURCE_PATH}
 
 WORKDIR /simulation
 
 ENTRYPOINT ["gz", "sim", "-r", "-s", "--headless-rendering"]
-CMD ["camera.sdf"]
+CMD ["default.sdf"]

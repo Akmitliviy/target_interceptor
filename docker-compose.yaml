@@ -10,6 +10,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - ./simulation/gazebo/worlds:/simulation/gazebo/worlds
+      - ./simulation/gazebo/models:/simulation/gazebo/models
     environment:
       - DISPLAY=${DISPLAY:-}
       - NVIDIA_DRIVER_CAPABILITIES=all
@@ -29,7 +30,7 @@ services:
       dockerfile: Dockerfile
       target: sitl
       args:
-        - PX4_BRANCH_NAME=main
+        - PX4_REVISION_TAG=v1.18.0
     environment:
       - PX4_GZ_STANDALONE=1
     depends_on:
