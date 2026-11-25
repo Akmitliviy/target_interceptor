@@ -34,4 +34,4 @@ COPY --from=build /source/PX4-Autopilot/build/px4_sitl_default/etc ./rootfs/etc
 
 WORKDIR /sitl/px4/rootfs
 
-ENTRYPOINT ["/sitl/px4/bin/px4", "-d", "/sitl/px4/rootfs"]
+ENTRYPOINT ["/sitl/px4/bin/px4", "/sitl/px4/rootfs"]

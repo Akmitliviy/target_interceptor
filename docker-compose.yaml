@@ -14,6 +14,9 @@ services:
     environment:
       - DISPLAY=${DISPLAY:-}
       - NVIDIA_DRIVER_CAPABILITIES=all
+      - __NV_PRIME_RENDER_OFFLOAD=1
+      - __GLX_VENDOR_LIBRARY_NAME=nvidia
+      - __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/10_nvidia.json
     deploy:
       resources:
         reservations:
@@ -44,6 +47,10 @@ services:
       - PX4_GZ_WORLD=aruco
       - PX4_SYS_AUTOSTART=4001
       - PX4_SIM_MODEL=gz_x500
+    volumes:
+      - ./sitl/logs:/sitl/px4/rootfs/log
     depends_on:
       simulation:
         condition: service_healthy
+    stdin_open: true
+    tty: true
