@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl gnupg ca-c
 
 FROM base AS sim
 
-ENV GZ_SIM_RESOURCE_PATH=/simulation/gazebo/worlds:/simulation/gazebo/models${GZ_SIM_RESOURCE_PATH}
+ENV GZ_SIM_RESOURCE_PATH=/simulation/gazebo/worlds:/simulation/gazebo/models
 
 WORKDIR /simulation
 
-ENTRYPOINT ["gz", "sim", "-r", "-s", "--headless-rendering"]
-CMD ["default.sdf"]
+ENTRYPOINT ["gz", "sim", "-r", "-s", "-v", "4", "--headless-rendering"]
+CMD ["aruco.sdf"]

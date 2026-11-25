@@ -34,6 +34,4 @@ COPY --from=build /source/PX4-Autopilot/build/px4_sitl_default/etc ./rootfs/etc
 
 WORKDIR /sitl/px4/rootfs
 
-ENV PX4_GZ_MODELS=/simulation/gazebo/models$PX4_GZ_MODELS
-ENV PX4_SYS_AUTOSTART=4001
 ENTRYPOINT ["/sitl/px4/bin/px4", "-d", "/sitl/px4/rootfs"]

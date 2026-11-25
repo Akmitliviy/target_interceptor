@@ -21,6 +21,14 @@ services:
           - driver: nvidia
             count: 1
             capabilities: [gpu]
+    healthcheck:
+      test: ["CMD-SHELL", "gz topic -l"]
+      start_period: 10s
+      start_interval: 10s
+      interval: 5s
+      retries: 5
+      timeout: 3s
+
   sitl:
     image: sitl
     container_name: sitl-container
@@ -33,5 +41,9 @@ services:
         - PX4_REVISION_TAG=v1.18.0
     environment:
       - PX4_GZ_STANDALONE=1
+      - PX4_GZ_WORLD=aruco
+      - PX4_SYS_AUTOSTART=4001
+      - PX4_SIM_MODEL=gz_x500
     depends_on:
-      - simulation
+      simulation:
+        condition: service_healthy
